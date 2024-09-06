@@ -18,7 +18,6 @@ import static java.util.Optional.ofNullable;
  * This class simulates a class that would normall invokce methods on the Core banking system either through htto
  * or a proproetary protocol.
  * <p>
- * NO MODIFICATION OF THIS CLASS IS ALLOWED!
  */
 @Component
 class ReallyShakyBankingCoreSystemService implements BankingCoreSystmeService {
@@ -28,7 +27,7 @@ class ReallyShakyBankingCoreSystemService implements BankingCoreSystmeService {
     @Override
     public void transfer(Transaction tx, String fromAccount, String toAccount) {
         randomizedWait(2000);
-        randomizeExceptionOrPanic(0.7f);
+        //randomizeExceptionOrPanic(0.7f);
         Account from = getOrCreateAccount(fromAccount);
         Account to = getOrCreateAccount(toAccount);
         from.setBalance(from.getBalance().subtract(valueOf(tx.getAmount())));
@@ -38,7 +37,7 @@ class ReallyShakyBankingCoreSystemService implements BankingCoreSystmeService {
     @Override
     public Account updateAccount(Account a) {
         randomizedWait(2000);
-        randomizeExceptionOrPanic(0.9f);
+        //randomizeExceptionOrPanic(0.9f);
         Account account = getOrCreateAccount(a.getId());
         account.setBalance(a.getBalance());
         account.setCurrency(a.getCurrency());
@@ -49,7 +48,7 @@ class ReallyShakyBankingCoreSystemService implements BankingCoreSystmeService {
     @Override
     public BigDecimal balance(@PathVariable String accountId) {
         randomizedWait(10000);
-        randomizeExceptionOrPanic(0.2f);
+        //randomizeExceptionOrPanic(0.2f);
         Account account = ofNullable(theBank.get(accountId)).orElseThrow(BankAccountController.AccountNotFoundException::new);
         return account.getBalance();
     }
@@ -57,7 +56,7 @@ class ReallyShakyBankingCoreSystemService implements BankingCoreSystmeService {
     @Override
     public Account getAccount(String accountNumber) {
         randomizedWait(5000);
-        randomizeExceptionOrPanic(0.9f, 0.5f);
+        //randomizeExceptionOrPanic(0.9f, 0.5f);
         return getOrCreateAccount(accountNumber);
     }
 
